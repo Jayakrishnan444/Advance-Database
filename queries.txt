@@ -1,0 +1,38 @@
+w24052687 > SELECT s.schedule_id, s.departure_date, s.departure_time,
+  2         s.seats_available, r.start_city, r.end_city
+  3  FROM SCHEDULE s
+  4  JOIN ROUTE r ON s.route_id = r.route_id
+  5  WHERE r.start_city = 'Newcastle'
+  6    AND r.end_city = 'Berwick-upon-Tweed'
+  7    AND s.seats_available >= 7
+  8    AND s.departure_date BETWEEN TO_DATE('10-09-2025', 'DD-MM-YYYY')
+  9                             AND TO_DATE('24-09-2025', 'DD-MM-YYYY');
+
+SCHEDULE_I DEPARTURE DEPAR SEATS_AVAILABLE START_CITY                                                                                           END_CITY                                                                                                  
+---------- --------- ----- --------------- ---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------      
+S11710     20-SEP-25 09:00              12 Newcastle                                                                                            Berwick-upon-Tweed                                                                                        
+
+w24052687 > SELECT a.agent_id, a.agent_name, COUNT(t.ticket_no) as tickets_sold
+  2  FROM AGENT a
+  3  JOIN TICKET t ON a.agent_id = t.agent_id
+  4  WHERE t.transact_date BETWEEN TO_DATE('15-09-2025', 'DD-MM-YYYY')
+  5                            AND TO_DATE('15-10-2025', 'DD-MM-YYYY')
+  6  GROUP BY a.agent_id, a.agent_name
+  7  HAVING COUNT(t.ticket_no) = (
+  8      SELECT MAX(ticket_count)
+  9      FROM (
+ 10          SELECT COUNT(ticket_no) as ticket_count
+ 11          FROM TICKET
+ 12          WHERE transact_date BETWEEN TO_DATE('15-09-2025', 'DD-MM-YYYY')
+ 13                                  AND TO_DATE('15-10-2025', 'DD-MM-YYYY')
+ 14          GROUP BY agent_id
+ 15      ) counts
+ 16  );
+
+AGENT_ID   AGENT_NAME                                                                                           TICKETS_SOLD                                                                                                                              
+---------- ---------------------------------------------------------------------------------------------------- ------------                                                                                                                              
+A5         North Light                                                                                                     1                                                                                                                              
+A1         Travel North                                                                                                    1                                                                                                                              
+A3         Coastline Agents                                                                                                1                                                                                                                              
+
+w24052687 > SPOOL OFF

@@ -1,0 +1,50 @@
+w24052687 > SELECT
+  2      r.route_id,
+  3      r.start_city,
+  4      r.end_city,
+  5      COUNT(s.stop_id) AS num_stops
+  6  FROM
+  7      route_obj r,
+  8      TABLE(r.stops) s
+  9  GROUP BY
+ 10      r.route_id,
+ 11      r.start_city,
+ 12      r.end_city
+ 13  ORDER BY
+ 14      num_stops DESC,
+ 15      r.route_id;
+
+ROUTE_ID   START_CITY                END_CITY                  NUM_STOPS                                                                                                                                
+---------- ------------------------- ------------------------- ---------                                                                                                                                
+DS1        Durham                    Stockton                          3                                                                                                                                
+NB1        Newcastle                 Berwick-upon-Tweed                3                                                                                                                                
+NE1        Newcastle                 Edinburgh                         3                                                                                                                                
+NS2        Newcastle                 Sunderland                        3                                                                                                                                
+
+w24052687 > SELECT
+  2      s.city_name,
+  3      COUNT(*) AS total_stops,
+  4      ROUND(AVG(s.duration), 2) AS avg_duration
+  5  FROM
+  6      route_obj r,
+  7      TABLE(r.stops) s
+  8  GROUP BY
+  9      s.city_name
+ 10  ORDER BY
+ 11      avg_duration DESC;
+
+CITY_NAME                      TOTAL_STOPS AVG_DURATION                                                                                                                                                 
+------------------------------ ----------- ------------                                                                                                                                                 
+Edinburgh                                1        60.00                                                                                                                                                 
+Berwick-upon-Tweed                       2        42.50                                                                                                                                                 
+Stockton                                 1        40.00                                                                                                                                                 
+Alnwick                                  1        30.00                                                                                                                                                 
+Sunderland                               1        25.00                                                                                                                                                 
+Sedgefield                               1        25.00                                                                                                                                                 
+Gateshead                                1        10.00                                                                                                                                                 
+Durham                                   1          .00                                                                                                                                                 
+Newcastle                                3          .00                                                                                                                                                 
+
+9 rows selected.
+
+w24052687 > SPOOL OFF

@@ -1,0 +1,150 @@
+w24052687 > INSERT INTO AGENT VALUES ('A1', 'Travel North');
+
+1 row created.
+
+w24052687 > INSERT INTO AGENT VALUES ('A2', 'City Tours');
+
+1 row created.
+
+w24052687 > INSERT INTO AGENT VALUES ('A3', 'Coastline Agents');
+
+1 row created.
+
+w24052687 > INSERT INTO AGENT VALUES ('A5', 'North Light');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO CUSTOMER VALUES ('C1', 'Paul Pogba');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C2', 'David Raya');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C3', 'Joan Garcia');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C4', 'Ben White');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C5', 'Nicholas Jackson');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO ROUTE VALUES ('NB1', 'Newcastle', 'Berwick-upon-Tweed');
+
+1 row created.
+
+w24052687 > INSERT INTO ROUTE VALUES ('NE1', 'Newcastle', 'Edinburgh');
+
+1 row created.
+
+w24052687 > INSERT INTO ROUTE VALUES ('DS1', 'Durham', 'Stockton');
+
+1 row created.
+
+w24052687 > INSERT INTO ROUTE VALUES ('NS2', 'Newcastle', 'Sunderland');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO VEHICLE VALUES ('001', 50);
+
+1 row created.
+
+w24052687 > INSERT INTO VEHICLE VALUES ('002', 45);
+
+1 row created.
+
+w24052687 > INSERT INTO VEHICLE VALUES ('003', 55);
+
+1 row created.
+
+w24052687 > INSERT INTO VEHICLE VALUES ('004', 55);
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO DRIVER VALUES ('D1', 'Julian Alvarez');
+
+1 row created.
+
+w24052687 > INSERT INTO DRIVER VALUES ('D2', 'Leon Goretzka');
+
+1 row created.
+
+w24052687 > INSERT INTO DRIVER VALUES ('D3', 'Adrian Pirlo');
+
+1 row created.
+
+w24052687 > INSERT INTO DRIVER VALUES ('D4', 'Chris Wood');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO SCHEDULE VALUES ('S11710', '09:00', TO_DATE('20-09-2025', 'DD-MM-YYYY'), 12, 'NB1', '002', 'D4');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S10585', '14:30', TO_DATE('14-09-2025','DD-MM-YYYY'), 14, 'DS1', '003', 'D1');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S12764', '10:30', TO_DATE('25-09-2025','DD-MM-YYYY'), 10, 'NE1', '001', 'D3');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S11264', '15:00', TO_DATE('26-09-2025','DD-MM-YYYY'), 9, 'NS2', '004', 'D1');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S16069', '11:00', TO_DATE('29-09-2025','DD-MM-YYYY'), 50, 'NE1', '001', 'D2');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO TICKET VALUES (78547577, 13.00, TO_DATE('17-09-2025','DD-MM-YYYY'), 'A3', 'C1', 'S11710');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (78602152, 11.50, TO_DATE('20-09-2025','DD-MM-YYYY'), 'A1', 'C2', 'S12764');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (79424931, 8.90, TO_DATE('10-09-2025','DD-MM-YYYY'), 'A5', 'C4', 'S10585');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (79424987, 11.00, TO_DATE('16-09-2025','DD-MM-YYYY'), 'A5', 'C3', 'S16069');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (79557418, 15.00, TO_DATE('21-10-2025','DD-MM-YYYY'), 'A2', 'C5', 'S11264');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > COMMIT;
+
+Commit complete.
+
+w24052687 > SPOOL OFF;

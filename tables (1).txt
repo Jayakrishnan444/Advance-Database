@@ -1,0 +1,326 @@
+w24052687 > DROP TABLE AGENT CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE CUSTOMER CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE ROUTE CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE VEHICLE CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE DRIVER CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE STOP CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE SCHEDULE CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE TICKET CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE MEAL CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > DROP TABLE ROUTE_STOP CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > CREATE TABLE AGENT (
+  2      agent_id VARCHAR(10) PRIMARY KEY,
+  3      agent_name VARCHAR(100) NOT NULL
+  4  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE CUSTOMER (
+  2      customer_id VARCHAR(10) PRIMARY KEY,
+  3      customer_name VARCHAR(100) NOT NULL
+  4  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE ROUTE (
+  2      route_id VARCHAR(10) PRIMARY KEY,
+  3      start_city VARCHAR(100) NOT NULL,
+  4      end_city VARCHAR(100) NOT NULL
+  5  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE VEHICLE (
+  2      vehicle_no VARCHAR(10) PRIMARY KEY,
+  3      capacity NUMBER(3) NOT NULL CHECK (capacity > 0)
+  4  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE DRIVER (
+  2      driver_id VARCHAR(10) PRIMARY KEY,
+  3      driver_name VARCHAR(100) NOT NULL
+  4  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE STOP (
+  2      stop_id VARCHAR(10) PRIMARY KEY,
+  3      stop_name VARCHAR(100) NOT NULL,
+  4      city_name VARCHAR(100) NOT NULL
+  5  );
+
+Table created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > CREATE TABLE MEAL (
+  2      meal_no VARCHAR(10) PRIMARY KEY,
+  3      meal_name VARCHAR(100) NOT NULL,
+  4      meal_price NUMBER(8,2) NOT NULL CHECK (meal_price >= 0),
+  5      stop_id VARCHAR(10) NOT NULL,
+  6      CONSTRAINT fk_meal_stop
+  7      FOREIGN KEY (stop_id)
+  8      REFERENCES STOP(stop_id)
+  9  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE ROUTE_STOP (
+  2      route_id VARCHAR(10) NOT NULL,
+  3      stop_id VARCHAR(10) NOT NULL,
+  4      duration NUMBER(4) NOT NULL CHECK (duration >= 0),
+  5      CONSTRAINT pk_route_stop PRIMARY KEY (route_id, stop_id),
+  6      CONSTRAINT fk_routestop_route
+  7      FOREIGN KEY (route_id)
+  8      REFERENCES ROUTE(route_id),
+  9      CONSTRAINT fk_routestop_stop
+ 10      FOREIGN KEY (stop_id)
+ 11      REFERENCES STOP(stop_id)
+ 12  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE SCHEDULE (
+  2      schedule_id VARCHAR(10) PRIMARY KEY,
+  3      departure_time VARCHAR(5) NOT NULL,
+  4      departure_date DATE NOT NULL,
+  5      seats_available NUMBER(3) NOT NULL CHECK (seats_available >= 0),
+  6      route_id VARCHAR(10) NOT NULL,
+  7      vehicle_no VARCHAR(10) NOT NULL,
+  8      driver_id VARCHAR(10) NOT NULL,
+  9      CONSTRAINT fk_schedule_route
+ 10      FOREIGN KEY (route_id)
+ 11      REFERENCES ROUTE(route_id),
+ 12      CONSTRAINT fk_schedule_vehicle
+ 13      FOREIGN KEY (vehicle_no)
+ 14      REFERENCES VEHICLE(vehicle_no),
+ 15      CONSTRAINT fk_schedule_driver
+ 16      FOREIGN KEY (driver_id)
+ 17      REFERENCES DRIVER(driver_id)
+ 18  );
+
+Table created.
+
+w24052687 > 
+w24052687 > CREATE TABLE TICKET (
+  2      ticket_no NUMBER(10) PRIMARY KEY,
+  3      ticket_price NUMBER(8,2) NOT NULL CHECK (ticket_price >= 0),
+  4      transact_date DATE NOT NULL,
+  5      agent_id VARCHAR(10) NOT NULL,
+  6      customer_id VARCHAR(10) NOT NULL,
+  7      schedule_id VARCHAR(10) NOT NULL,
+  8      CONSTRAINT fk_ticket_agent
+  9      FOREIGN KEY (agent_id)
+ 10      REFERENCES AGENT(agent_id),
+ 11      CONSTRAINT fk_ticket_customer
+ 12      FOREIGN KEY (customer_id)
+ 13      REFERENCES CUSTOMER(customer_id),
+ 14      CONSTRAINT fk_ticket_schedule
+ 15      FOREIGN KEY (schedule_id)
+ 16      REFERENCES SCHEDULE(schedule_id)
+ 17  );
+
+Table created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO AGENT VALUES ('A1', 'Travel North');
+
+1 row created.
+
+w24052687 > INSERT INTO AGENT VALUES ('A2', 'City Tours');
+
+1 row created.
+
+w24052687 > INSERT INTO AGENT VALUES ('A3', 'Coastline Agents');
+
+1 row created.
+
+w24052687 > INSERT INTO AGENT VALUES ('A5', 'North Light');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO CUSTOMER VALUES ('C1', 'Paul Pogba');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C2', 'David Raya');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C3', 'Joan Garcia');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C4', 'Ben White');
+
+1 row created.
+
+w24052687 > INSERT INTO CUSTOMER VALUES ('C5', 'Nicholas Jackson');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO ROUTE VALUES ('NB1', 'Newcastle', 'Berwick-upon-Tweed');
+
+1 row created.
+
+w24052687 > INSERT INTO ROUTE VALUES ('NE1', 'Newcastle', 'Edinburgh');
+
+1 row created.
+
+w24052687 > INSERT INTO ROUTE VALUES ('DS1', 'Durham', 'Stockton');
+
+1 row created.
+
+w24052687 > INSERT INTO ROUTE VALUES ('NS2', 'Newcastle', 'Sunderland');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO VEHICLE VALUES ('001', 50);
+
+1 row created.
+
+w24052687 > INSERT INTO VEHICLE VALUES ('002', 45);
+
+1 row created.
+
+w24052687 > INSERT INTO VEHICLE VALUES ('003', 55);
+
+1 row created.
+
+w24052687 > INSERT INTO VEHICLE VALUES ('004', 55);
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO DRIVER VALUES ('D1', 'Julian Alvarez');
+
+1 row created.
+
+w24052687 > INSERT INTO DRIVER VALUES ('D2', 'Leon Goretzka');
+
+1 row created.
+
+w24052687 > INSERT INTO DRIVER VALUES ('D3', 'Adrian Pirlo');
+
+1 row created.
+
+w24052687 > INSERT INTO DRIVER VALUES ('D4', 'Chris Wood');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO SCHEDULE VALUES ('S11710', '09:00', TO_DATE('20-09-2025', 'DD-MM-YYYY'), 12, 'NB1', '002', 'D4');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S10585', '14:30', TO_DATE('14-09-2025','DD-MM-YYYY'), 14, 'DS1', '003', 'D1');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S12764', '10:30', TO_DATE('25-09-2025','DD-MM-YYYY'), 10, 'NE1', '001', 'D3');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S11264', '15:00', TO_DATE('26-09-2025','DD-MM-YYYY'), 9, 'NS2', '004', 'D1');
+
+1 row created.
+
+w24052687 > INSERT INTO SCHEDULE VALUES ('S16069', '11:00', TO_DATE('29-09-2025','DD-MM-YYYY'), 50, 'NE1', '001', 'D2');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO TICKET VALUES (78547577, 13.00, TO_DATE('17-09-2025','DD-MM-YYYY'), 'A3', 'C1', 'S11710');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (78602152, 11.50, TO_DATE('20-09-2025','DD-MM-YYYY'), 'A1', 'C2', 'S12764');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (79424931, 8.90, TO_DATE('10-09-2025','DD-MM-YYYY'), 'A5', 'C4', 'S10585');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (79424987, 11.00, TO_DATE('16-09-2025','DD-MM-YYYY'), 'A5', 'C3', 'S16069');
+
+1 row created.
+
+w24052687 > INSERT INTO TICKET VALUES (79557418, 15.00, TO_DATE('21-10-2025','DD-MM-YYYY'), 'A2', 'C5', 'S11264');
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > 
+w24052687 > COMMIT;
+
+Commit complete.
+
+w24052687 > SPOOL OFF;

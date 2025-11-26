@@ -1,0 +1,72 @@
+w24052687 > INSERT INTO route_obj VALUES (
+  2      route_t(
+  3          'NB1',
+  4          'Newcastle',
+  5          'Berwick-upon-Tweed',
+  6          route_stop_tbl(
+  7              stop_t('S11','Newcastle Coach Station', 'Newcastle', 0),
+  8              stop_t('S12','Alnwick Stop', 'Alnwick', 30),
+  9              stop_t('S13','Berwick Terminal','Berwick-upon-Tweed', 40)
+ 10          )
+ 11      )
+ 12  );
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO route_obj VALUES (
+  2      route_t(
+  3          'NE1',
+  4          'Newcastle',
+  5          'Edinburgh',
+  6          route_stop_tbl(
+  7              stop_t('S21','Newcastle Coach Station','Newcastle', 0),
+  8              stop_t('S22','Berwick Terminal','Berwick', 45),
+  9              stop_t('S23','Edinburgh Central', 'Edinburgh', 60)
+ 10          )
+ 11      )
+ 12  );
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO route_obj VALUES (
+  2      route_t(
+  3          'DS1',
+  4          'Durham',
+  5          'Stockton',
+  6          route_stop_tbl(
+  7              stop_t('S31','Durham Station', 'Durham',   0),
+  8              stop_t('S32','Sedgefield Stop', 'Sedgefield',25),
+  9              stop_t('S33','Stockton Station', 'Stockton', 40)
+ 10          )
+ 11      )
+ 12  );
+
+1 row created.
+
+w24052687 > 
+w24052687 > 
+w24052687 > INSERT INTO route_obj VALUES (
+  2      route_t(
+  3          'NS2',
+  4          'Newcastle',
+  5          'Sunderland',
+  6          route_stop_tbl(
+  7              stop_t('S41','Newcastle Coach Station', 'Newcastle', 0),
+  8              stop_t('S42','Gateshead Stop', 'Gateshead', 10),
+  9              stop_t('S43','Sunderland Station', 'Sunderland',25)
+ 10          )
+ 11      )
+ 12  );
+
+1 row created.
+
+w24052687 > 
+w24052687 > COMMIT;
+
+Commit complete.
+
+w24052687 > SPOOL OFF

@@ -1,0 +1,63 @@
+w24052687 > DROP TABLE route_obj PURGE;
+DROP TABLE route_obj PURGE
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+Help: https://docs.oracle.com/error-help/db/ora-00942/ 
+
+
+w24052687 > DROP TYPE route_t;
+
+Type dropped.
+
+w24052687 > DROP TYPE route_stop_tbl;
+
+Type dropped.
+
+w24052687 > DROP TYPE stop_t;
+
+Type dropped.
+
+w24052687 > 
+w24052687 > CREATE TYPE stop_t AS OBJECT (
+  2      stop_id    VARCHAR(10),
+  3      stop_name  VARCHAR(100),
+  4      city_name  VARCHAR(100),
+  5      duration   NUMBER(4)
+  6  );
+  7  /
+
+Type created.
+
+w24052687 > 
+w24052687 > CREATE TYPE route_stop_tbl AS TABLE OF stop_t;
+  2  /
+
+Type created.
+
+w24052687 > 
+w24052687 > CREATE TYPE route_t AS OBJECT (
+  2      route_id    VARCHAR(10),
+  3      start_city  VARCHAR(100),
+  4      end_city    VARCHAR(100),
+  5      stops       route_stop_tbl
+  6  );
+  7  /
+
+Type created.
+
+w24052687 > 
+w24052687 > CREATE TABLE route_obj OF route_t
+  2  NESTED TABLE stops STORE AS route_stops_nt;
+
+Table created.
+
+w24052687 > /
+CREATE TABLE route_obj OF route_t
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+Help: https://docs.oracle.com/error-help/db/ora-00955/ 
+
+
+w24052687 > SPOOL OFF
